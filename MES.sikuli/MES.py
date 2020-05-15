@@ -1,12 +1,16 @@
 # * ปิด NUMLOCK ทุกครั้งก่อนการ run (Bug ของ Sukili ทำให้กด Shift ค้างไม่ได้)
 
-# Settings
-roundRun = 20 # จำนวนรอบที่ต้องการให้โปรแกรมทำงาน
-savePath = "C:\\Users\\gpo\\Desktop\\MBR\\" # Path ที่เก็บโฟลเดอร์และไฟล์
+import datetime
 
-for n in range(roundRun):
+# Settings
+roundRun = 102 # จำนวนไอเทม จำนวนรอบที่โปรแกรมต้องทำงาน
+savePath = "C:\\Users\\gpo\\Desktop\\MBR-2\\110214520111\\" # Path ที่เก็บโฟลเดอร์และไฟล์
+
+start = time.time() # เวลาที่เริ่มโปรแกรม
+
+for m in range(roundRun):
     # Click หน้าจอ Production Report ให้อยู่ด้านหน้าตัวเลข MO no. (บรรทัดแรก)
-    click(Region(10,491,3,19))
+    click(Region(6,366,366,23))
     
     # Select MO no.
     for n in range(8):
@@ -49,8 +53,8 @@ for n in range(roundRun):
     # Close หน้าจอรายละเอียด
     click(Region(850,131,49,20))
     
-    # Click Active หน้าจอ folder MBR
-    click(Region(1341,676,14,13))
+    # Click Active หน้าจอ windows folder
+    click(Region(1295,652,23,27))
     
     # สร้าง Folder ใหม่
     type("n", KeyModifier.CTRL + KeyModifier.SHIFT)
@@ -81,7 +85,7 @@ for n in range(roundRun):
     
     # เปลี่ยน Printer
     type(Key.TAB)
-    for n in range(17):
+    for n in range(18):
         type(Key.DOWN)
     
     # Click ปุ่ม Print
@@ -96,8 +100,8 @@ for n in range(roundRun):
     while doWhile:
         sleep(3)
 
-        if firstLoop: # Loop แรกตั้งค่า timeout 60 วินาที เพื่อรอการประมวลผลไฟล์ PDF
-            timeOut = 60
+        if firstLoop: # Loop แรกตั้งค่า timeout 1 ชั่วโมง เพื่อรอการประมวลผลไฟล์ PDF
+            timeOut = 3600
         else: # Loop ต่อไปให้รอ 3 วินาที
             timeOut = 3
 
@@ -124,13 +128,18 @@ for n in range(roundRun):
     
     # ปิด popup print
     click("acknowlegde_button.png")
-    
-    # เลื่อนลง 1 บรรทัด
-    #type(Key.DOWN)
-    click(Region(1167,682,14,13)) # Click ที่ ปุ่ม Down Scroll
+
+    sleep(0.5)
+    click(Region(69,441,23,16)) # Click หน้าจอ Production Report
+    type(Key.DOWN) # เลื่อนลง 1 บรรทัด
+    #click(Region(1167,682,14,13)) # Click ที่ ปุ่ม Down Scroll
+
+done = time.time() # เวลาที่โปรแกรมรันเสร็จ
+elapsed = done - start # คำนวณเวลาที่โปรแกรมใช้รัน
+timeuse = str(datetime.timedelta(seconds=round(elapsed))) # เวลาที่ใช้ format hh:mm:ss
 
 # แสดง ข้อความแจ้งรันโปรแกรมเสร็จแล้ว
-popup("Finished")
+popup("Finished - %s" % timeuse )
 
 # Debug Only
 #print "Clipboard[%s]" % Env.getClipboard()
