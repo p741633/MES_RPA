@@ -14,8 +14,12 @@ RPA เพื่อ Export PDF จากโปรแกรม MES ด้วย S
   - Setup jython https://github.com/RaiMan/SikuliX1/wiki/How-to-make-Jython-ready-in-the-IDE
 - PDFCreator 1.2.3
 - เครื่องต้องมี jre เวอร์ชั่น 8 ขึ้นไป
-- สำหรับหน้าจอความละเอียด 1366 x 768
+- หน้าจอความละเอียด 1366 x 768
 
-# Example
+# Template (1366 x 768)
 
 - ![](MES-template.png)
+
+# Example (1366 x 768)
+
+- ![](example.gif)
