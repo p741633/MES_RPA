@@ -3,8 +3,8 @@
 import datetime
 
 # Settings
-roundRun = 1029 # จำนวนไอเทม จำนวนรอบที่โปรแกรมต้องทำงาน
-savePath = "D:\\MBR-2\\110115011221\\" # Path ที่เก็บโฟลเดอร์และไฟล์
+roundRun = 246 # จำนวนไอเทม จำนวนรอบที่โปรแกรมต้องทำงาน
+savePath = "C:\\MBR-2\\110301790101\\" # Path ที่เก็บโฟลเดอร์และไฟล์
 
 start = time.time() # เวลาที่เริ่มโปรแกรม
 
@@ -37,11 +37,11 @@ for m in range(roundRun):
     
     # double click ที่หน้าจอ Manufactureing orders เพื่อเปิดหน้าจอรายละเอียด
     sleep(1)
-    doubleClick(Region(325,199,28,10))
+    doubleClick(Region(352,392,11,6))
     
     # Click ที่ Textbox Batch
     sleep(1)
-    click(Region(603,261,2,9))
+    click(Region(641,326,1,10))
     
     # Select Batch
     for n in range(8):
@@ -51,10 +51,10 @@ for m in range(roundRun):
     type("c", KeyModifier.CTRL)
     
     # Close หน้าจอรายละเอียด
-    click(Region(860,133,28,16))
+    click(Region(899,200,27,11))
     
     # Click Active หน้าจอ windows folder
-    click(Region(1010,369,18,17))
+    click(Region(989,557,27,17))
     
     # สร้าง Folder ใหม่
     type("n", KeyModifier.CTRL + KeyModifier.SHIFT)
@@ -94,7 +94,7 @@ for m in range(roundRun):
         type(Key.DOWN)
     
     # Click ปุ่ม Print
-    click(Region(2150,452,66,17))
+    click(Region(2199,454,43,14))
     
     # Wait Windows Popup
     #wait(Pattern("pdfcreator_title.png").similar(0.80),)
@@ -103,22 +103,26 @@ for m in range(roundRun):
     firstLoop = True # first loop checker
 
     sleep(80)
+
+    if exists("pdfcreator_monitor.png"):
+        click("pdfcreator_monitor.png")
+        type(Key.F2)
     
     while doWhile:
         sleep(1)
 
         if firstLoop: # Loop แรกตั้งค่า timeout 1 ชั่วโมง เพื่อรอการประมวลผลไฟล์ PDF
             timeOut = 3600
-        else: # Loop ต่อไปให้รอ 7 วินาที
-            timeOut = 7
+        else: # Loop ต่อไปให้รอ 3 วินาที
+            timeOut = 3
 
         # ตรวจสอบว่ามี หน้าจอของ PDFCreator 1.2.3 ขึ้นมาหรือยัง
         if exists(Pattern("pdfcreator_document.png").exact(), timeOut):
             click(Pattern("pdfcreator_document.png").exact()) # Click Title เพื่อ Active หน้าจอ
             sleep(1)
-            click(Region(884,277,29,5)) # click textbox
+            click(Region(864,273,25,9)) # click textbox
             type(str(counter)) # พิมพ์ชื่อไฟล์ (ใช้ตัวแปร counter)
-            click(Region(902,642,60,18)) # Click ปุ่ม Save (หน้าจอ PDFCreator)
+            click(Region(894,644,64,17)) # Click ปุ่ม Save (หน้าจอ PDFCreator)
             sleep(1)
             if (firstLoop): # ถ้าเป็นการ save ครั้งแรกให้ใส่ path
                 click(Region(969,363,40,26))
@@ -136,7 +140,7 @@ for m in range(roundRun):
     
     # ปิด popup print
     sleep(2)
-    click("acknowlegde_button.png")
+    click(Region(1408,527,14,13))
 
     sleep(1)
     click(Region(1522,367,21,18)) # Click หน้าจอ Production Report
